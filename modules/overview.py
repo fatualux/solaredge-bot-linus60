@@ -43,14 +43,12 @@ class Overview:
                 f"Last Update Time: {overview.get('lastUpdateTime')}\n"
                 "Life Time Data:\n"
                 f"  Energy: {overview['lifeTimeData']['energy']}\n"
-                f"  Revenue: {overview['lifeTimeData']['revenue']}\n"
                 "Last Year Data:\n"
             )
             last_year_data = overview.get('lastYearData')
             if last_year_data:
                 overview_str += (
                     f"  Energy: {last_year_data.get('energy')}\n"
-                    f"  Revenue: {last_year_data.get('revenue')}\n"
                 )
             else:
                 overview_str += "  No data available for last year.\n"
@@ -59,7 +57,6 @@ class Overview:
             if last_month_data:
                 overview_str += (
                     f"  Energy: {last_month_data.get('energy')}\n"
-                    f"  Revenue: {last_month_data.get('revenue')}\n"
                 )
             else:
                 overview_str += "  No data available for last month.\n"
@@ -68,7 +65,6 @@ class Overview:
             if last_day_data:
                 overview_str += (
                     f"  Energy: {last_day_data.get('energy')}\n"
-                    f"  Revenue: {last_day_data.get('revenue')}\n"
                 )
             else:
                 overview_str += "  No data available for last day.\n"
