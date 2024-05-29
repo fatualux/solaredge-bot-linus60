@@ -41,7 +41,7 @@ sh gen-config.sh
 ## USAGE
 
 ```
-source secrets.sh && python main.py
+python solaredge-bot.py
 ```
 
 Done!

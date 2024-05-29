@@ -1,7 +1,10 @@
+import telepot
+from modules.message_handler import MessageHandler
+from modules.automate import Automate
+from modules.overview import Overview
+from modules.production import Production
 import logging
 import os
-from modules.tg_helper import TelegramHelper
-from modules.overview import Overview
 
 logging.basicConfig(level=logging.DEBUG)
 logging.getLogger("main").setLevel(logging.DEBUG)
@@ -12,17 +15,28 @@ SITE_ID = os.getenv("SITE_ID")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 
-telegram_helper = TelegramHelper()
+# Initialize the Telegram bot
+bot = telepot.Bot(BOT_TOKEN)
 
-# Initialize overview API
+# Initialize overview and production APIs
 overview_api = Overview(SITE_TOKEN)
+production_api = Production(SITE_TOKEN)
 
-try:
-    # Get site overview
-    overview_data = overview_api.get_site_overview(SITE_ID)
-    overview_message = overview_api.print_site_overview(overview_data)
+# Initialize Automate with bot
+automate_module = Automate(bot)
 
-    # Send the overview message via Telegram
-    telegram_helper.send(overview_message)
-except Exception as e:
-    logging.error(f"Error in main execution: {e}")
+# Initialize MessageHandler with Automate module
+message_handler = MessageHandler(bot, automate_module)
+
+
+# Function to handle incoming messages
+def handle(msg):
+    message_handler.handle_message(msg)
+
+
+# Start listening for messages
+bot.message_loop(handle)
+
+# Keep the script running
+while True:
+    pass

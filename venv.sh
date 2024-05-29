@@ -76,12 +76,8 @@ install_req() {
 starting_app() {
   echo "Configuring your secrets..."
   source ./$CONFIG_FILE
-  echo "Environment variables:"
-  echo "BASEURL=$BASEURL"
-  echo "SITE_TOKEN=$SITE_TOKEN"
-  echo "SITE_ID=$SITE_ID"
-  echo "BOT_TOKEN=$BOT_TOKEN"
-  echo "CHAT_ID=$CHAT_ID"
+  echo "Done."
+  echo ""
   echo "Starting application..."
   echo ""
   python $WORKDIR/$APP_FILE
